@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "646580884446",
+    "project_id": "phone-diagnostic-b9854",
+    "storage_bucket": "phone-diagnostic-b9854.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646580884446:android:9bfd8fb9fbc45fa42d034f",
+        "android_client_info": {
+          "package_name": "com.miempresa.appsensores.flutter_prueba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Mw4LPWsPQp0hYgEj_YhJwQ5DtdynhiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
