@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 import 'screens/home_screen.dart';
 
@@ -22,11 +23,7 @@ class PhoneDiagnosticApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Phone Diagnostic',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark,
-      ),
+      theme: AppTheme.light(),
       home: const HomeScreen(),
     );
   }

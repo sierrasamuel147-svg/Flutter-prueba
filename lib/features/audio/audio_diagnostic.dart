@@ -5,50 +5,78 @@ class AudioDiagnostic {
 
   bool playing = false;
   bool tested = false;
-  bool userConfirmed = false;
+  bool working = false;
 
   String message = 'No probado';
 
-  Future<void> playTestTone() async {
+  static const Duration testDuration =
+      Duration(seconds: 3);
+
+  Future<bool> runAutomaticTest() async {
+    if (playing) {
+      return false;
+    }
+
     try {
+      tested = false;
+      working = false;
+      playing = true;
+
+      message =
+          'Preparando salida de audio...';
+
       await _player.stop();
 
       await _player.setVolume(1.0);
 
-      playing = true;
-      tested = true;
-      userConfirmed = false;
-      message = 'Reproduciendo prueba de altavoz';
-
-      await _player.play(
+      await _player.setSource(
         AssetSource('audio/test_tone.mp3'),
       );
+
+      message =
+          'Reproduciendo tono de prueba...';
+
+      await _player.resume();
+
+      await Future.delayed(
+        testDuration,
+      );
+
+      await _player.stop();
+
+      playing = false;
+      tested = true;
+      working = true;
+
+      message =
+          'Salida de audio disponible';
+
+      return true;
     } catch (e) {
       playing = false;
       tested = true;
-      message = 'No se pudo reproducir el audio: $e';
+      working = false;
+
+      message =
+          'No se pudo reproducir el audio';
+
+      return false;
     }
   }
 
   Future<void> stop() async {
-    await _player.stop();
+    try {
+      await _player.stop();
+    } catch (_) {}
 
     playing = false;
-  }
-
-  void confirmWorking() {
-    userConfirmed = true;
-    playing = false;
-    message = 'Altavoz funcionando correctamente';
-  }
-
-  void reportFailure() {
-    userConfirmed = false;
-    playing = false;
-    message = 'El usuario no escuchó correctamente el audio';
   }
 
   Future<void> dispose() async {
+    try {
+      await _player.stop();
+    } catch (_) {}
+
     await _player.dispose();
   }
 }
