@@ -5,7 +5,9 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   battery_plus
+  cloud_firestore
   connectivity_plus
+  firebase_auth
   firebase_core
   flutter_blue_plus_winrt
   geolocator_windows

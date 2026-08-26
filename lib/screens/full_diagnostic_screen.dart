@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../core/diagnostics/diagnostic_engine.dart';
 import '../core/diagnostics/diagnostic_result.dart';
 import '../core/diagnostics/diagnostic_status.dart';
+import '../features/history/diagnostic_history_service.dart';
 
 import 'audio_screen.dart';
 import 'camera_screen.dart';
@@ -24,6 +25,9 @@ class _FullDiagnosticScreenState
     extends State<FullDiagnosticScreen> {
   final DiagnosticEngine engine =
       DiagnosticEngine();
+
+  final DiagnosticHistoryService historyService =
+      DiagnosticHistoryService();
 
   List<DiagnosticResult> results = [];
 
@@ -95,6 +99,38 @@ class _FullDiagnosticScreenState
         currentTest =
             'Diagnóstico completado';
       });
+
+      // ==========================================================
+      // GUARDAR EN FIRESTORE
+      // ==========================================================
+
+      try {
+        await historyService.saveDiagnostic(
+          List<DiagnosticResult>.from(results),
+        );
+
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Diagnóstico guardado en el historial.',
+            ),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } catch (e) {
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'El diagnóstico terminó, pero no se pudo guardar en el historial.',
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
     } catch (e) {
       if (!mounted) return;
 
@@ -1038,6 +1074,7 @@ class _FullDiagnosticScreenState
 
           if (failedTests > 0) ...[
             const SizedBox(height: 5),
+
             Text(
               '$failedTests prueba(s) '
               'requieren atención',
@@ -1052,6 +1089,7 @@ class _FullDiagnosticScreenState
 
           if (unavailableTests > 0) ...[
             const SizedBox(height: 5),
+
             Text(
               '$unavailableTests componente(s) '
               'no disponibles',
@@ -1061,6 +1099,7 @@ class _FullDiagnosticScreenState
 
           if (notTestedTests > 0) ...[
             const SizedBox(height: 5),
+
             Text(
               '$notTestedTests prueba(s) '
               'no realizadas',

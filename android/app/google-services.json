@@ -12,7 +12,20 @@
           "package_name": "com.miempresa.appsensores.flutter_prueba"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "646580884446-u6jkkv1eirn3a7b24s4kfc5nia4fss0h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.miempresa.appsensores.flutter_prueba",
+            "certificate_hash": "62f05a6ac27b4e891f16b27da08b7f8964e9bcb7"
+          }
+        },
+        {
+          "client_id": "646580884446-7hfebf3203cpjcp5tn8rgcqb4nrsscsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA0Mw4LPWsPQp0hYgEj_YhJwQ5DtdynhiA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646580884446-7hfebf3203cpjcp5tn8rgcqb4nrsscsb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "646580884446-cju7pv0i5dqpp3eeaaod1qjrjl96c11l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.miempresa.appsensores.flutterPrueba"
+              }
+            }
+          ]
         }
       }
     }
